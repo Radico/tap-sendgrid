@@ -2,6 +2,7 @@ import backoff
 import pendulum
 import singer
 from simplejson.scanner import JSONDecodeError
+from requests.exceptions import ChunkedEncodingError
 
 from .streams import IDS
 from .http import end_of_records_check, retry_get
@@ -186,7 +187,7 @@ class Syncer(object):
             else:
                 break
 
-    @backoff.on_exception(backoff.expo, JSONDecodeError, max_tries=20, max_value=200)
+    @backoff.on_exception(backoff.expo, (JSONDecodeError, ChunkedEncodingError), max_tries=20, max_value=200)
     def get_response_json(self, endpoint, stream_id, params):
         response = retry_get(
             stream_id,
