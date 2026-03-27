@@ -10,9 +10,9 @@ setup(name='tap-sendgrid',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
       py_modules=['tap_sendgrid'],
       python_requires='>=3.9',
-      install_requires=['singer-python>=6,<7',
-                        'requests>=2.31,<3',
-                        'pendulum>=3,<4',
+      install_requires=['singer-python==6.1.1',
+                        'requests==2.32.3',
+                        'pendulum==3.0.0',
                         ],
       entry_points='''
           [console_scripts]
